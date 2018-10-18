@@ -6,6 +6,7 @@ import cors from 'cors'
 import schema from './schema'
 import resolvers from './resolvers'
 import models, { sequelize } from './models'
+import freshData from './models/freshData'
 
 const app = express()
 app.use(cors())
@@ -23,7 +24,12 @@ const server = new ApolloServer({
 
 server.applyMiddleware({ app, path: '/graphql' })
 
-sequelize.sync().then(async () => {
+const freshDatabase = true
+
+sequelize.sync({ force: freshDatabase }).then(async () => {
+  if (freshDatabase) {
+    freshData()
+  }
   app.listen({ port }, () => {
     console.log(`Apollo Server on http://localhost:${port}/graphql`)
   })
