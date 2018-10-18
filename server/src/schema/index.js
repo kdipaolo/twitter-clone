@@ -1,11 +1,19 @@
 import { gql } from 'apollo-server-express'
+import userSchema from './user'
+import tweetsSchema from './tweet'
 
-export default gql`
+const linkSchema = gql`
   type Query {
-    me: User
+    _: Boolean
   }
 
-  type User {
-    username: String!
+  type Mutation {
+    _: Boolean
+  }
+
+  type Subscription {
+    _: Boolean
   }
 `
+
+export default [linkSchema, userSchema, tweetsSchema]
