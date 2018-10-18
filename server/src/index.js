@@ -16,7 +16,7 @@ const server = new ApolloServer({
   typeDefs: schema,
   resolvers,
   context: {
-    models: {},
+    models,
     me: {}
   }
 })
