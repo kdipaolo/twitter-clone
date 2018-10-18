@@ -16,10 +16,10 @@ const port = 8000
 const server = new ApolloServer({
   typeDefs: schema,
   resolvers,
-  context: {
+  context: async () => ({
     models,
-    me: {}
-  }
+    me: await models.User.findByLogin('kdipaolo')
+  })
 })
 
 server.applyMiddleware({ app, path: '/graphql' })

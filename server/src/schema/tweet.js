@@ -7,10 +7,11 @@ export default gql`
   }
 
   extend type Mutation {
-    createTweet(userId: ID!, message: String!, createdAt: String!): Tweet
+    createTweet(message: String!): Tweet
   }
 
   type Tweet {
+    id: ID!
     message: String!
     user: User
   }

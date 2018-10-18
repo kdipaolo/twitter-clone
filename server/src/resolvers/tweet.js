@@ -8,19 +8,20 @@ export default {
     }
   },
   Mutation: {
-    createTweet: async (parent, { message, userId, createdAt }, { models }) => {
+    createTweet: async (
+      parent,
+      { message, userId, createdAt },
+      { models, me }
+    ) => {
       return await models.Tweet.create({
         message,
-        userId,
-        createdAt
+        userId: me.id
       })
     }
   },
   Tweet: {
     user: async (parent, args, { models }) => {
-      return {
-        username: 'Kurt DiPaolo'
-      }
+      return await models.User.findById(parent.userId)
     }
   }
 }

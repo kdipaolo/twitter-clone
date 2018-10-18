@@ -7,5 +7,6 @@ export default gql`
 
   type User {
     username: String!
+    tweets: [Tweet]!
   }
 `
