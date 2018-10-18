@@ -1,3 +1,6 @@
+import { isAuthenticated } from './authorization'
+import { combineResolvers } from 'graphql-resolvers'
+
 export default {
   Query: {
     tweet: async (parent, { id }, { models }) => {
@@ -8,16 +11,15 @@ export default {
     }
   },
   Mutation: {
-    createTweet: async (
-      parent,
-      { message, userId, createdAt },
-      { models, me }
-    ) => {
-      return await models.Tweet.create({
-        message,
-        userId: me.id
-      })
-    }
+    createTweet: combineResolvers(
+      isAuthenticated,
+      async (parent, { message, userId, createdAt }, { models, me }) => {
+        return await models.Tweet.create({
+          message,
+          userId: me.id
+        })
+      }
+    )
   },
   Tweet: {
     user: async (parent, args, { models }) => {
