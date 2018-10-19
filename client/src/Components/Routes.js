@@ -7,10 +7,19 @@ import Moments from './Layout/Moments'
 import Notifications from './Layout/Notifications'
 import Messages from './Layout/Messages'
 import Header from './Layout/Header'
+import LeftBar from './Layout/LeftBar'
+import RightBar from './Layout/RightBar'
+import Card from './Elements/Card'
 
-const MainContainer = styled.div`
+const Wrapper = styled.div`
   max-width: ${props => props.theme.maxWidth};
   margin: 5% auto;
+`
+
+const Container = styled.div`
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: 1fr 2fr 1fr;
 `
 
 export default function Routes() {
@@ -18,14 +27,20 @@ export default function Routes() {
     <Router>
       <>
         <Header />
-        <MainContainer>
+        <Wrapper>
           <Switch>
-            <Route exact path="/" component={Home} />
-            <Route path="/moments" component={Moments} />
-            <Route path="/notifications" component={Notifications} />
-            <Route path="/messages" component={Messages} />
+            <Container>
+              <LeftBar />
+              <Card>
+                <Route exact path="/" component={Home} />
+                <Route path="/moments" component={Moments} />
+                <Route path="/notifications" component={Notifications} />
+                <Route path="/messages" component={Messages} />
+              </Card>
+              <RightBar />
+            </Container>
           </Switch>
-        </MainContainer>
+        </Wrapper>
       </>
     </Router>
   )

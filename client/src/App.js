@@ -14,6 +14,7 @@ const GlobalStyle = createGlobalStyle`
   html {
     box-sizing: border-box;
     font-size: 10px;
+    background: ${theme.lightGray}
   }
   *, *:before, *:after {
     box-sizing: inherit;
