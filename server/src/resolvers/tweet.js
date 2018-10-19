@@ -3,12 +3,18 @@ import { combineResolvers } from 'graphql-resolvers'
 
 export default {
   Query: {
-    tweet: async (parent, { id }, { models }) => {
-      return await models.Tweet.findById(id)
-    },
-    tweets: async (parent, args, { models }) => {
-      return await models.Tweet.findAll()
-    }
+    tweet: combineResolvers(
+      isAuthenticated,
+      async (parent, { id }, { models }) => {
+        return await models.Tweet.findById(id)
+      }
+    ),
+    tweets: combineResolvers(
+      isAuthenticated,
+      async (parent, args, { models }) => {
+        return await models.Tweet.findAll()
+      }
+    )
   },
   Mutation: {
     createTweet: combineResolvers(
