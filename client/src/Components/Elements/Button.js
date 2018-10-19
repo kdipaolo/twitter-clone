@@ -1,8 +1,9 @@
+// Button Component
 import React, { Component } from 'react'
 import styled, { css } from 'styled-components'
-import { darken } from 'polished'
 
 const Container = styled.button`
+  /* Primary Button Styles */
   background: ${props => props.theme.blue};
   color: ${props => props.theme.white};
   padding: 6px;
@@ -14,6 +15,7 @@ const Container = styled.button`
   &:hover {
     cursor: pointer;
   }
+  /* Hollow Button Styles */
   ${props =>
     props.hollow &&
     css`
@@ -21,7 +23,7 @@ const Container = styled.button`
       color: ${props => props.theme.blue};
       background: transparent;
     `};
-
+  /* Disabled Button Styles */
   ${props =>
     props.disabled &&
     css`

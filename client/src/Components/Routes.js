@@ -1,16 +1,20 @@
-import React, { Fragment } from 'react'
+// All routes for application here
+import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import styled from 'styled-components'
 
-import Home from './Layout/Home'
-import Moments from './Layout/Moments'
-import Notifications from './Layout/Notifications'
-import Messages from './Layout/Messages'
+// Elements
 import Header from './Layout/Header'
 import User from './Layout/User'
 import LeftBar from './Layout/LeftBar'
 import RightBar from './Layout/RightBar'
 import Card from './Elements/Card'
+
+// Routes
+import Home from './Layout/Home'
+import Moments from './Layout/Moments'
+import Notifications from './Layout/Notifications'
+import Messages from './Layout/Messages'
 
 const Wrapper = styled.div`
   max-width: ${props => props.theme.maxWidth};
@@ -37,6 +41,7 @@ export default function Routes() {
                 <Route path="/moments" component={Moments} />
                 <Route path="/notifications" component={Notifications} />
                 <Route path="/messages" component={Messages} />
+                {/* User Profile View */}
                 <Route path="/user/:username" component={User} />
               </Card>
               <RightBar />

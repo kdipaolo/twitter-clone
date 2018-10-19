@@ -1,7 +1,9 @@
+// Home Layout Container
 import React, { Component } from 'react'
 import Tweet from '../Elements/Tweet'
 import styled from 'styled-components'
 import NewTweet from '../Elements/NewTweet'
+
 const Container = styled.div`
   > div {
     border-top: 1px solid ${props => props.theme.lightGray};

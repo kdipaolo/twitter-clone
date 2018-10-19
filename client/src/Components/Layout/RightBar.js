@@ -1,8 +1,9 @@
+// Who to follow Right Bar Component
 import React, { Component } from 'react'
 import Card from '../Elements/Card'
 import UserThumbnail from '../Elements/UserThumbnail'
 
-export default class LeftBar extends Component {
+export default class RightBar extends Component {
   render() {
     return (
       <Card>

@@ -1,3 +1,4 @@
+// Moments layout component
 import React, { Component } from 'react'
 
 export default class Moments extends Component {

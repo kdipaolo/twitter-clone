@@ -1,3 +1,4 @@
+// Notifications layout component
 import React, { Component } from 'react'
 
 export default class Notifications extends Component {

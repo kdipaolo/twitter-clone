@@ -1,9 +1,10 @@
+// Header Component
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
-import { Home, Bell, Zap, Mail } from 'react-feather'
 import styled from 'styled-components'
 import logo from '../../images/logo.svg'
 import Button from '../Elements/Button'
+import { links } from '../../content'
 
 const Wrapper = styled.div`
   background: ${props => props.theme.white};
@@ -31,7 +32,7 @@ const Links = styled.div`
   a {
     display: flex;
     align-items: center;
-    padding: 10px;
+    padding: ${props => props.theme.space};
     svg {
       margin-right: 5px;
     }
@@ -47,24 +48,20 @@ export default class Header extends Component {
     return (
       <Wrapper>
         <Container>
+          {/* Twitter Links */}
           <Links>
-            <NavLink to="/">
-              <Home size={22} /> Home
-            </NavLink>
-            <NavLink to="/moments">
-              <Zap size={22} />
-              Moments
-            </NavLink>
-            <NavLink to="/notifications">
-              <Bell size={22} />
-              Notifications
-            </NavLink>
-            <NavLink to="/messages">
-              <Mail size={22} />
-              Messages
-            </NavLink>
+            {links.map(link => {
+              const Icon = link.icon
+              return (
+                <NavLink to={link.to}>
+                  <Icon size={22} /> {link.name}
+                </NavLink>
+              )
+            })}
           </Links>
-          <img src={logo} width="50" />
+          {/* Twitter Logo */}
+          <img src={logo} width="50" alt="Logo" />
+          {/* Tweet Button */}
           <div>
             <Button>Tweet</Button>
           </div>

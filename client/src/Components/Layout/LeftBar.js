@@ -1,3 +1,4 @@
+// User Profile Info Left Bar Component
 import React, { Component } from 'react'
 import Card from '../Elements/Card'
 import styled from 'styled-components'
@@ -25,7 +26,7 @@ const Info = styled.ul`
 `
 
 const UserInfo = styled.div`
-  padding: 10px;
+  padding: ${props => props.theme.space};
   p {
     color: ${props => props.theme.darkGray};
   }

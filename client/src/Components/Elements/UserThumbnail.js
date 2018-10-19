@@ -1,8 +1,8 @@
+// User Thumbnail Component
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-
 import Button from './Button'
 import ProfilePicture from './ProfilePicture'
 

@@ -1,10 +1,11 @@
+// New Tweet Component
 import React, { Component } from 'react'
 import ProfilePicture from './ProfilePicture'
 import styled, { css } from 'styled-components'
 import Button from './Button'
 
 const Container = styled.div`
-  padding: 10px;
+  padding: ${props => props.theme.space};
   background: ${props => props.theme.lightBlue};
   text-align: right;
 `
@@ -12,8 +13,8 @@ const Container = styled.div`
 const Input = styled.div`
   display: grid;
   grid-template-columns: auto 1fr;
-  grid-gap: 10px;
-  margin-bottom: 10px;
+  grid-gap: ${props => props.theme.space};
+  margin-bottom: ${props => props.theme.space};
   align-items: flex-start;
 `
 
@@ -21,7 +22,7 @@ const Textarea = styled.textarea`
   outline: none;
   border-radius: 7px;
   border: 1px solid ${props => props.theme.lightGray};
-  padding: 10px;
+  padding: ${props => props.theme.space};
   font-size: 1.4rem;
   resize: none;
   height: 40px;
@@ -47,11 +48,6 @@ export default class NewTweet extends Component {
   expand = () => {
     this.setState({
       expand: true
-    })
-  }
-  unExpand = () => {
-    this.setState({
-      expand: false
     })
   }
   handleTextareaChange = e => {

@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import UserThumbnail from './UserThumbnail'
 
 const Container = styled.div`
-  padding: 0 10px;
+  padding: 0 ${props => props.theme.space};
 `
 
 export default class Tweet extends Component {
