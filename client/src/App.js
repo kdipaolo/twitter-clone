@@ -7,7 +7,9 @@ const theme = {
   white: '#FFFFFF',
   darkGray: '#65757E',
   lightGray: '#E6ECF0',
-  maxWidth: '1200px'
+  maxWidth: '1200px',
+  black: '#333',
+  lightBlue: '#E7F5FC'
 }
 
 const GlobalStyle = createGlobalStyle`

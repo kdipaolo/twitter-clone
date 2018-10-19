@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import Button from './Button'
 import ProfilePicture from './ProfilePicture'
 import styled from 'styled-components'
@@ -19,6 +20,12 @@ const Title = styled.h3`
   }
 `
 
+const P = styled.p`
+  color: ${props => props.theme.black};
+  font-size: 1.35rem;
+  line-height: 1.5;
+`
+
 export default class UserThumbnail extends Component {
   render() {
     return (
@@ -28,9 +35,14 @@ export default class UserThumbnail extends Component {
           <Title>
             Kurt DiPaolo <span>@kurtdipaolo</span>
           </Title>
-          <Button hollow>Follow</Button>
+          {!this.props.noFollow && <Button hollow>Follow</Button>}
+          <P>{this.props.children}</P>
         </div>
       </Container>
     )
   }
+}
+
+UserThumbnail.propTypes = {
+  noFollow: PropTypes.bool
 }

@@ -21,6 +21,12 @@ const Container = styled.button`
       color: ${props => props.theme.blue};
       background: transparent;
     `};
+
+  ${props =>
+    props.disabled &&
+    css`
+      opacity: 0.3;
+    `};
 `
 
 export default class Button extends Component {

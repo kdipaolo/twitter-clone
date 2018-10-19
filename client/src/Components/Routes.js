@@ -31,7 +31,7 @@ export default function Routes() {
           <Switch>
             <Container>
               <LeftBar />
-              <Card>
+              <Card noPad>
                 <Route exact path="/" component={Home} />
                 <Route path="/moments" component={Moments} />
                 <Route path="/notifications" component={Notifications} />

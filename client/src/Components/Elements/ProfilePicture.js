@@ -8,10 +8,6 @@ const Image = styled.img`
 
 export default class ProfilePicture extends Component {
   render() {
-    return (
-      <div>
-        <Image src={defaultProfile} alt="Default User Profile" width="50" />
-      </div>
-    )
+    return <Image src={defaultProfile} alt="Default User Profile" width="50" />
   }
 }
