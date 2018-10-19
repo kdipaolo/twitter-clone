@@ -30,19 +30,21 @@ const P = styled.p`
 
 export default class UserThumbnail extends Component {
   render() {
+    const { username, name } = this.props.user
+    const { noFollow, children } = this.props
     return (
       <Container>
-        <Link to="/user/kdipaolo">
+        <Link to={`/user/${username}`}>
           <ProfilePicture />
         </Link>
         <div>
-          <Link to="/user/kdipaolo">
+          <Link to={`/user/${username}`}>
             <Title>
-              Kurt DiPaolo <span>@kurtdipaolo</span>
+              {name} <span>@{username}</span>
             </Title>
           </Link>
-          {!this.props.noFollow && <Button hollow>Follow</Button>}
-          <P>{this.props.children}</P>
+          {!noFollow && <Button hollow>Follow</Button>}
+          <P>{children}</P>
         </div>
       </Container>
     )
@@ -50,5 +52,9 @@ export default class UserThumbnail extends Component {
 }
 
 UserThumbnail.propTypes = {
-  noFollow: PropTypes.bool
+  noFollow: PropTypes.bool,
+  user: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    username: PropTypes.string.isRequired
+  }).isRequired
 }

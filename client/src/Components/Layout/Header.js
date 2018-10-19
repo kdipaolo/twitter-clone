@@ -50,10 +50,10 @@ export default class Header extends Component {
         <Container>
           {/* Twitter Links */}
           <Links>
-            {links.map(link => {
+            {links.map((link, i) => {
               const Icon = link.icon
               return (
-                <NavLink to={link.to}>
+                <NavLink to={link.to} key={i}>
                   <Icon size={22} /> {link.name}
                 </NavLink>
               )

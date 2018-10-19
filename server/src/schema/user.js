@@ -14,6 +14,7 @@ export default gql`
   type User {
     id: ID!
     username: String!
+    name: String!
     email: String!
     tweets: [Tweet]!
   }

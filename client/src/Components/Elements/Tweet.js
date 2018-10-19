@@ -10,14 +10,24 @@ const Container = styled.div`
 
 export default class Tweet extends Component {
   render() {
+    const { message, user } = this.props.tweet
+    console.log(user)
     return (
       <Container>
-        <UserThumbnail noFollow>{this.props.message}</UserThumbnail>
+        <UserThumbnail noFollow user={user}>
+          {message}
+        </UserThumbnail>
       </Container>
     )
   }
 }
 
 Tweet.propTypes = {
-  message: PropTypes.string.isRequired
+  tweet: PropTypes.shape({
+    message: PropTypes.string.isRequired,
+    user: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      username: PropTypes.string.isRequired
+    }).isRequired
+  }).isRequired
 }

@@ -1,8 +1,10 @@
 // Home Layout Container
 import React, { Component } from 'react'
+import { Query } from 'react-apollo'
 import Tweet from '../Elements/Tweet'
 import styled from 'styled-components'
 import NewTweet from '../Elements/NewTweet'
+import { GET_TWEETS } from '../../utils/queries'
 
 const Container = styled.div`
   > div {
@@ -16,19 +18,18 @@ const Container = styled.div`
 export default class Home extends Component {
   render() {
     return (
-      <Container>
-        <NewTweet />
-        <Tweet message="First Tweet" />
-        <Tweet message="Hello everyone this is a long tweet to see how this looks with long form text. Hello everyone this is a long tweet to see how this looks." />
-        <Tweet message="Three Tweet" />
-        <Tweet message="Fourth Tweet" />
-        <Tweet message="Fifith Tweet" />
-        <Tweet message="Sixth Tweet" />
-        <Tweet message="Sevent Tweet" />
-        <Tweet message="Eight Tweet" />
-        <Tweet message="Ninth Tweet" />
-        <Tweet message="Tenth Tweet" />
-      </Container>
+      <Query query={GET_TWEETS}>
+        {({ data: { tweets }, loading }) =>
+          !loading && (
+            <Container>
+              <NewTweet />
+              {tweets.map(tweet => (
+                <Tweet key={tweet.id} tweet={tweet} />
+              ))}
+            </Container>
+          )
+        }
+      </Query>
     )
   }
 }

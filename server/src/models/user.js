@@ -11,6 +11,13 @@ const user = (sequelize, DataTypes) => {
         notEmpty: true
       }
     },
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: true
+      }
+    },
     email: {
       type: DataTypes.STRING,
       unique: true,
