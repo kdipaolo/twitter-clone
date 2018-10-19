@@ -1,3 +1,4 @@
+// Combining all schemas into one master scehma for apollo server
 import { gql } from 'apollo-server-express'
 import userSchema from './user'
 import tweetsSchema from './tweet'

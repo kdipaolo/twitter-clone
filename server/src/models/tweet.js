@@ -1,3 +1,4 @@
+// Tweet Model
 const tweet = (sequelize, DataTypes) => {
   const Tweet = sequelize.define('tweet', {
     message: {

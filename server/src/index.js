@@ -9,16 +9,22 @@ import resolvers from './resolvers'
 import models, { sequelize } from './models'
 import freshData from './models/freshData'
 
+// Initializing express server
 const app = express()
+
+// Using CORS
 app.use(cors())
 
+// Getting and verifying JWT
 const getMe = async req => {
   const token = req.headers['x-token']
 
   if (token) {
+    // if token and if token is verified return the getMe object
     try {
       return await jwt.verify(token, process.env.SECRET)
     } catch (e) {
+      // If now throw an error
       throw new AuthenticationError('Your session expired. Sign in again.')
     }
   }
@@ -26,12 +32,13 @@ const getMe = async req => {
 
 const port = 8000
 
+// Initializing the express server the
 const server = new ApolloServer({
   typeDefs: schema,
   resolvers,
   context: async ({ req }) => {
+    // padding in models, me object, and secret to all resolvers with context
     const me = await getMe(req)
-
     return {
       models,
       me,
@@ -40,14 +47,17 @@ const server = new ApolloServer({
   }
 })
 
+// Applying graphql route
 server.applyMiddleware({ app, path: '/graphql' })
 
 const freshDatabase = true
 
+// if fresh database flag set to true then load in fresh data
 sequelize.sync({ force: freshDatabase }).then(async () => {
   if (freshDatabase) {
     freshData()
   }
+  // Start up server and listen on port
   app.listen({ port }, () => {
     console.log(`Apollo Server on http://localhost:${port}/graphql`)
   })
