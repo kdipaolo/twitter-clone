@@ -14,7 +14,8 @@ const GlobalStyle = createGlobalStyle`
   html {
     box-sizing: border-box;
     font-size: 10px;
-    background: ${theme.lightGray}
+    background: ${theme.lightGray};
+    font-family: 'Helvetica';
   }
   *, *:before, *:after {
     box-sizing: inherit;
@@ -28,6 +29,10 @@ const GlobalStyle = createGlobalStyle`
   a {
     text-decoration: none;
     color: ${theme.darkGray};
+  }
+  h3,
+  p {
+    margin: 0;
   }
 `
 

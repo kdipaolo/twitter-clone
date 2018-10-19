@@ -18,7 +18,7 @@ const Wrapper = styled.div`
 
 const Container = styled.div`
   display: grid;
-  grid-gap: 20px;
+  grid-gap: 15px;
   grid-template-columns: 1fr 2fr 1fr;
 `
 

@@ -5,7 +5,7 @@ import { darken } from 'polished'
 const Container = styled.button`
   background: ${props => props.theme.blue};
   color: ${props => props.theme.white};
-  padding: 10px;
+  padding: 6px;
   min-width: 75px;
   font-weight: bold;
   font-size: 1.25rem;
@@ -17,7 +17,7 @@ const Container = styled.button`
   ${props =>
     props.hollow &&
     css`
-      border: 2px solid ${props => props.theme.blue};
+      border: 1px solid ${props => props.theme.blue};
       color: ${props => props.theme.blue};
       background: transparent;
     `};
