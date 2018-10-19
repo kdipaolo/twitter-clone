@@ -7,6 +7,7 @@ import Moments from './Layout/Moments'
 import Notifications from './Layout/Notifications'
 import Messages from './Layout/Messages'
 import Header from './Layout/Header'
+import User from './Layout/User'
 import LeftBar from './Layout/LeftBar'
 import RightBar from './Layout/RightBar'
 import Card from './Elements/Card'
@@ -36,6 +37,7 @@ export default function Routes() {
                 <Route path="/moments" component={Moments} />
                 <Route path="/notifications" component={Notifications} />
                 <Route path="/messages" component={Messages} />
+                <Route path="/user/:username" component={User} />
               </Card>
               <RightBar />
             </Container>

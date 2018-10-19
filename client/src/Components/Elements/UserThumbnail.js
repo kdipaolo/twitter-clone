@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
+import { Link } from 'react-router-dom'
+
 import Button from './Button'
 import ProfilePicture from './ProfilePicture'
-import styled from 'styled-components'
 
 const Container = styled.div`
   display: grid;
@@ -30,11 +32,15 @@ export default class UserThumbnail extends Component {
   render() {
     return (
       <Container>
-        <ProfilePicture />
+        <Link to="/user/kdipaolo">
+          <ProfilePicture />
+        </Link>
         <div>
-          <Title>
-            Kurt DiPaolo <span>@kurtdipaolo</span>
-          </Title>
+          <Link to="/user/kdipaolo">
+            <Title>
+              Kurt DiPaolo <span>@kurtdipaolo</span>
+            </Title>
+          </Link>
           {!this.props.noFollow && <Button hollow>Follow</Button>}
           <P>{this.props.children}</P>
         </div>
