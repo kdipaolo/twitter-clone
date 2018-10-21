@@ -11,7 +11,6 @@ const Container = styled.div`
 export default class Tweet extends Component {
   render() {
     const { message, user } = this.props.tweet
-    console.log(user)
     return (
       <Container>
         <UserThumbnail noFollow user={user}>

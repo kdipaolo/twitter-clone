@@ -4,8 +4,8 @@ import { AuthenticationError, UserInputError } from 'apollo-server'
 
 // Takes user info, secret, and expires in data and creates/signs token
 const createToken = async (user, secret, expiresIn) => {
-  const { id, email, username } = user
-  return await jwt.sign({ id, email, username }, secret, { expiresIn })
+  const { id, email, username, name } = user
+  return await jwt.sign({ id, email, username, name }, secret, { expiresIn })
 }
 
 export default {
@@ -19,14 +19,15 @@ export default {
     // Sign Up for a new account mutation
     signUp: async (
       parent,
-      { username, email, password },
+      { username, email, password, name },
       { models, secret }
     ) => {
       // Creating a new user
       const user = await models.User.create({
         username,
         email,
-        password
+        password,
+        name
       })
       /// returning a token for the client side to use for auth
       return {

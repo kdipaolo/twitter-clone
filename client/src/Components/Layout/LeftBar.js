@@ -2,6 +2,7 @@
 import React, { Component } from 'react'
 import Card from '../Elements/Card'
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
 
 const BannerPicture = styled.div`
   background: ${props => props.theme.blue};
@@ -34,12 +35,13 @@ const UserInfo = styled.div`
 
 export default class LeftBar extends Component {
   render() {
+    const { name, username } = this.props.user
     return (
       <Card noPad>
         <BannerPicture />
         <UserInfo>
-          <h3>Kurt DiPaolo</h3>
-          <p>@KurtDiPaolo</p>
+          <h3>{name}</h3>
+          <p>@{username}</p>
           <Info>
             <li>
               Tweets
@@ -58,4 +60,11 @@ export default class LeftBar extends Component {
       </Card>
     )
   }
+}
+
+LeftBar.propTypes = {
+  user: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    username: PropTypes.string.isRequired
+  }).isRequired
 }

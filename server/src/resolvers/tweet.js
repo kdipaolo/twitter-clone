@@ -12,9 +12,12 @@ export default {
       }
     ),
     // If user is authenticated, shows all tweets
-    tweets: combineResolvers(async (parent, args, { models }) => {
-      return await models.Tweet.findAll()
-    })
+    tweets: combineResolvers(
+      isAuthenticated,
+      async (parent, args, { models }) => {
+        return await models.Tweet.findAll()
+      }
+    )
   },
   Mutation: {
     // If user is authenticated, create a new tweet

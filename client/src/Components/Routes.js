@@ -2,10 +2,10 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import styled from 'styled-components'
+import User from './Utils/User'
 
 // Elements
 import Header from './Layout/Header'
-import User from './Layout/User'
 import LeftBar from './Layout/LeftBar'
 import RightBar from './Layout/RightBar'
 import Card from './Elements/Card'
@@ -15,6 +15,8 @@ import Home from './Layout/Home'
 import Moments from './Layout/Moments'
 import Notifications from './Layout/Notifications'
 import Messages from './Layout/Messages'
+import UserProfile from './Layout/User'
+import Login from './Layout/Login'
 
 const Wrapper = styled.div`
   max-width: ${props => props.theme.maxWidth};
@@ -29,26 +31,35 @@ const Container = styled.div`
 
 export default function Routes() {
   return (
-    <Router>
-      <>
-        <Header />
-        <Wrapper>
-          <Switch>
-            <Container>
-              <LeftBar />
-              <Card noPad>
-                <Route exact path="/" component={Home} />
-                <Route path="/moments" component={Moments} />
-                <Route path="/notifications" component={Notifications} />
-                <Route path="/messages" component={Messages} />
-                {/* User Profile View */}
-                <Route path="/user/:username" component={User} />
-              </Card>
-              <RightBar />
-            </Container>
-          </Switch>
-        </Wrapper>
-      </>
-    </Router>
+    <User>
+      {({ me: currentUser, loading }) =>
+        !loading &&
+        (currentUser ? (
+          <Router>
+            <>
+              <Header />
+              <Wrapper>
+                <Switch>
+                  <Container>
+                    <LeftBar user={currentUser} />
+                    <Card noPad>
+                      <Route exact path="/" component={Home} />
+                      <Route path="/moments" component={Moments} />
+                      <Route path="/notifications" component={Notifications} />
+                      <Route path="/messages" component={Messages} />
+                      {/* User Profile View */}
+                      <Route path="/user/:username" component={UserProfile} />
+                    </Card>
+                    <RightBar />
+                  </Container>
+                </Switch>
+              </Wrapper>
+            </>
+          </Router>
+        ) : (
+          <Login />
+        ))
+      }
+    </User>
   )
 }

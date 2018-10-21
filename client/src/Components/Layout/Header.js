@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import logo from '../../images/logo.svg'
 import Button from '../Elements/Button'
 import { links } from '../../content'
+import { TWITTER_CLONE_TOKEN } from '../../config'
 
 const Wrapper = styled.div`
   background: ${props => props.theme.white};
@@ -43,7 +44,16 @@ const Links = styled.div`
   }
 `
 
+const Actions = styled.div`
+  display: grid;
+  grid-template-columns: auto auto;
+`
+
 export default class Header extends Component {
+  logout = () => {
+    localStorage.removeItem(TWITTER_CLONE_TOKEN)
+    window.location.reload()
+  }
   render() {
     return (
       <Wrapper>
@@ -62,9 +72,12 @@ export default class Header extends Component {
           {/* Twitter Logo */}
           <img src={logo} width="50" alt="Logo" />
           {/* Tweet Button */}
-          <div>
+          <Actions>
             <Button>Tweet</Button>
-          </div>
+            <Button hollow onClick={this.logout}>
+              Log Out
+            </Button>
+          </Actions>
         </Container>
       </Wrapper>
     )

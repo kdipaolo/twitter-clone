@@ -29,6 +29,14 @@ const Container = styled.button`
     css`
       opacity: 0.3;
     `};
+
+  ${props =>
+    props.full &&
+    css`
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+    `};
 `
 
 export default class Button extends Component {
