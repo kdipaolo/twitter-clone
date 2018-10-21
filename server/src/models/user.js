@@ -34,6 +34,9 @@ const user = (sequelize, DataTypes) => {
         notEmpty: true,
         len: [7, 42]
       }
+    },
+    following: {
+      type: DataTypes.ARRAY(DataTypes.STRING)
     }
   })
 

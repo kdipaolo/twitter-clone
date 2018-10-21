@@ -2,7 +2,7 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import styled from 'styled-components'
-import User from './Utils/User'
+import Authenticated from './Utils/Authenticated'
 
 // Elements
 import Header from './Layout/Header'
@@ -31,35 +31,31 @@ const Container = styled.div`
 
 export default function Routes() {
   return (
-    <User>
-      {({ me: currentUser, loading }) =>
-        !loading &&
-        (currentUser ? (
-          <Router>
-            <>
-              <Header />
-              <Wrapper>
-                <Switch>
-                  <Container>
-                    <LeftBar user={currentUser} />
-                    <Card noPad>
-                      <Route exact path="/" component={Home} />
-                      <Route path="/moments" component={Moments} />
-                      <Route path="/notifications" component={Notifications} />
-                      <Route path="/messages" component={Messages} />
-                      {/* User Profile View */}
-                      <Route path="/user/:username" component={UserProfile} />
-                    </Card>
-                    <RightBar />
-                  </Container>
-                </Switch>
-              </Wrapper>
-            </>
-          </Router>
-        ) : (
-          <Login />
-        ))
-      }
-    </User>
+    <Authenticated>
+      {currentUser => (
+        <Router>
+          <>
+            <Header />
+
+            <Wrapper>
+              <Switch>
+                <Container>
+                  <LeftBar user={currentUser} />
+                  <Card noPad>
+                    <Route exact path="/" component={Home} />
+                    <Route path="/moments" component={Moments} />
+                    <Route path="/notifications" component={Notifications} />
+                    <Route path="/messages" component={Messages} />
+                    {/* User Profile View */}
+                    <Route path="/user/:username" component={UserProfile} />
+                  </Card>
+                  <RightBar />
+                </Container>
+              </Switch>
+            </Wrapper>
+          </>
+        </Router>
+      )}
+    </Authenticated>
   )
 }

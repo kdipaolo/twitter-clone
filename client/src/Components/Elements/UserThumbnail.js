@@ -5,7 +5,8 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import Button from './Button'
 import ProfilePicture from './ProfilePicture'
-
+import { Mutation } from 'react-apollo'
+import { FOLLOW } from '../../utils/queries'
 const Container = styled.div`
   display: grid;
   grid-template-columns: auto 1fr;
@@ -30,23 +31,40 @@ const P = styled.p`
 
 export default class UserThumbnail extends Component {
   render() {
-    const { username, name } = this.props.user
+    const { username, name, id } = this.props.user
     const { noFollow, children } = this.props
     return (
-      <Container>
-        <Link to={`/user/${username}`}>
-          <ProfilePicture />
-        </Link>
-        <div>
-          <Link to={`/user/${username}`}>
-            <Title>
-              {name} <span>@{username}</span>
-            </Title>
-          </Link>
-          {!noFollow && <Button hollow>Follow</Button>}
-          <P>{children}</P>
-        </div>
-      </Container>
+      <Mutation mutation={FOLLOW} refetchQueries={['whoToFollow', 'feed']}>
+        {follow => (
+          <Container>
+            <Link to={`/user/${username}`}>
+              <ProfilePicture />
+            </Link>
+            <div>
+              <Link to={`/user/${username}`}>
+                <Title>
+                  {name} <span>@{username}</span>
+                </Title>
+              </Link>
+              {!noFollow && (
+                <Button
+                  hollow
+                  onClick={() =>
+                    follow({
+                      variables: {
+                        userId: id
+                      }
+                    })
+                  }
+                >
+                  Follow
+                </Button>
+              )}
+              <P>{children}</P>
+            </div>
+          </Container>
+        )}
+      </Mutation>
     )
   }
 }
@@ -54,6 +72,7 @@ export default class UserThumbnail extends Component {
 UserThumbnail.propTypes = {
   noFollow: PropTypes.bool,
   user: PropTypes.shape({
+    id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     username: PropTypes.string.isRequired
   }).isRequired

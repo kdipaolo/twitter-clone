@@ -6,6 +6,21 @@ export const GET_TWEETS = gql`
       message
       id
       user {
+        id
+        username
+        name
+      }
+    }
+  }
+`
+
+export const FEED = gql`
+  query feed {
+    feed {
+      message
+      id
+      user {
+        id
         username
         name
       }
@@ -19,6 +34,7 @@ export const ME = gql`
       username
       name
       email
+      following
     }
   }
 `
@@ -37,6 +53,24 @@ export const SIGN_UP = gql`
       name: $name
     ) {
       token
+    }
+  }
+`
+
+export const FOLLOW = gql`
+  mutation($userId: ID!) {
+    follow(userId: $userId) {
+      id
+    }
+  }
+`
+
+export const WHO_TO_FOLLOW = gql`
+  query whoToFollow {
+    whoToFollow {
+      id
+      name
+      username
     }
   }
 `

@@ -39,6 +39,7 @@ const server = new ApolloServer({
   context: async ({ req }) => {
     // padding in models, me object, and secret to all resolvers with context
     const me = await getMe(req)
+
     return {
       models,
       me,
@@ -50,7 +51,7 @@ const server = new ApolloServer({
 // Applying graphql route
 server.applyMiddleware({ app, path: '/graphql' })
 
-const freshDatabase = true
+const freshDatabase = false
 
 // if fresh database flag set to true then load in fresh data
 sequelize.sync({ force: freshDatabase }).then(async () => {

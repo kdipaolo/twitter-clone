@@ -17,7 +17,22 @@ export default {
       async (parent, args, { models }) => {
         return await models.Tweet.findAll()
       }
-    )
+    ),
+    feed: async (parent, args, { models, me }) => {
+      const { following } = await models.User.findById(me.id)
+
+      if (following) {
+        const tweets = await models.Tweet.findAll({
+          where: {
+            userId: following
+          }
+        })
+
+        return tweets
+      } else {
+        return []
+      }
+    }
   },
   Mutation: {
     // If user is authenticated, create a new tweet

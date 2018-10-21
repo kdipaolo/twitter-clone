@@ -1,6 +1,7 @@
 // User Resolver
 import jwt from 'jsonwebtoken'
 import { AuthenticationError, UserInputError } from 'apollo-server'
+import Sequelize from 'sequelize'
 
 // Takes user info, secret, and expires in data and creates/signs token
 const createToken = async (user, secret, expiresIn) => {
@@ -12,7 +13,16 @@ export default {
   Query: {
     // Get currently logged in user data from JWT
     me: (parent, args, { me }) => {
-      return me
+      return me || {}
+    },
+    whoToFollow: async (parent, args, { models, me }) => {
+      const { following: a } = await models.User.findById(me.id)
+
+      const following = a ? [...a, String(me.id)] : [String(me.id)]
+      const users = await models.User.findAll()
+      return users.filter(user => {
+        return !following.includes(String(user.id))
+      })
     }
   },
   Mutation: {
@@ -51,12 +61,31 @@ export default {
       // If there is a user found and thee password is valid
       // returning a token for the client side to use for auth
       return { token: createToken(user, secret, '30m') }
+    },
+    follow: async (parent, args, { models, me }) => {
+      models.User.update(
+        {
+          following: Sequelize.fn(
+            'array_append',
+            Sequelize.col('following'),
+            args.userId
+          )
+        },
+        { where: { id: me.id } }
+      )
+      return {
+        id: args.userId
+      }
     }
   },
   User: {
     // Get all of a users tweets
     tweets: async (parent, args, { models }) => {
       return await models.Tweet.findAll({ where: { userId: parent.id } })
+    },
+    following: async (parent, args, { models }) => {
+      const user = await models.User.findById(parent.id)
+      return (user && user.following) || []
     }
   }
 }

@@ -4,6 +4,7 @@ import { gql } from 'apollo-server-express'
 export default gql`
   extend type Query {
     me: User
+    whoToFollow: [User]!
   }
 
   extend type Mutation {
@@ -14,14 +15,16 @@ export default gql`
       name: String!
     ): Token!
     signIn(login: String!, password: String!): Token!
+    follow(userId: ID!): User!
   }
 
   type User {
-    id: ID!
-    username: String!
-    name: String!
-    email: String!
-    tweets: [Tweet]!
+    id: ID
+    username: String
+    name: String
+    email: String
+    tweets: [Tweet]
+    following: [String]
   }
 
   type Token {

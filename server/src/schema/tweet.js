@@ -5,6 +5,7 @@ export default gql`
   extend type Query {
     tweet(id: ID!): Tweet
     tweets: [Tweet]!
+    feed: [Tweet]!
   }
 
   extend type Mutation {
