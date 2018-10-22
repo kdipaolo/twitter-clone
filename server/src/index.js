@@ -8,6 +8,10 @@ import schema from './schema'
 import resolvers from './resolvers'
 import models, { sequelize } from './models'
 import freshData from './models/freshData'
+import colors from 'colors'
+
+const freshDatabase = false
+const port = process.env.PORT || 8888
 
 // Initializing express server
 const app = express()
@@ -17,10 +21,6 @@ app.use(cors())
 
 app.get('/', function(req, res) {
   res.send('Go to /graphql for API')
-})
-
-app.listen({ port: port }, () => {
-  console.log(`Apollo Server on http://localhost:${port}/graphql`)
 })
 
 // Getting and verifying JWT
@@ -37,8 +37,6 @@ const getMe = async req => {
     }
   }
 }
-
-const port = process.env.PORT || 8888
 
 // Initializing the express server the
 const server = new ApolloServer({
@@ -60,7 +58,10 @@ const server = new ApolloServer({
 // Applying graphql route
 server.applyMiddleware({ app, path: '/graphql' })
 
-const freshDatabase = false
+const launchMessage = port =>
+  colors.bgGreen.black.italic.underline(
+    `🚀 [Apollo Server] 🚀 on http://localhost:${port}/graphql`
+  )
 
 // if fresh database flag set to true then load in fresh data
 sequelize.sync({ force: freshDatabase }).then(async () => {
@@ -69,6 +70,6 @@ sequelize.sync({ force: freshDatabase }).then(async () => {
   }
   // Start up server and listen on port
   app.listen({ port }, () => {
-    console.log(`Apollo Server on http://localhost:${port}/graphql`)
+    console.log(launchMessage(port))
   })
 })
