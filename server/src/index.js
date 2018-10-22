@@ -38,6 +38,7 @@ const port = process.env.PORT || 8888
 
 // Initializing the express server the
 const server = new ApolloServer({
+  introspection: true,
   typeDefs: schema,
   resolvers,
   context: async ({ req }) => {
