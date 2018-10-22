@@ -57,6 +57,14 @@ export const SIGN_UP = gql`
   }
 `
 
+export const SIGN_IN = gql`
+  mutation signIn($login: String!, $password: String!) {
+    signIn(login: $login, password: $password) {
+      token
+    }
+  }
+`
+
 export const CREATE_TWEET = gql`
   mutation createTweet($message: String!) {
     createTweet(message: $message) {

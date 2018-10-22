@@ -51,7 +51,7 @@ export default {
     // Sign in with a login and password
     signIn: async (parent, { login, password }, { models, secret }) => {
       // Find user by either username or email
-      const user = models.User.findByLogin(login)
+      const user = await models.User.findByLogin(login)
       // if no user found, throw an error
       if (!user) {
         throw new UserInputError('No user found with this login credentials.')

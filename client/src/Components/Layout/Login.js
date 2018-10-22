@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import styled, { css } from 'styled-components'
 import Button from '../Elements/Button'
 import { Mutation } from 'react-apollo'
-import { SIGN_UP } from '../../utils/queries'
+import { SIGN_UP, LOGIN, SIGN_IN } from '../../utils/queries'
 import { TWITTER_CLONE_TOKEN } from '../../config'
 
 const Half = styled.div`
@@ -45,6 +45,7 @@ const Input = styled.input`
     props.full &&
     css`
       width: 100%;
+      margin: ${props => props.theme.space} 0px;
     `};
 `
 
@@ -54,6 +55,8 @@ const FormWrapper = styled.form`
     css`
       background: ${props => props.theme.lightGray};
       padding: 10px;
+      max-width: 450px;
+      margin: auto;
     `};
 `
 
@@ -64,19 +67,33 @@ class Form extends Component {
     email: '',
     password: ''
   }
-  handleSubmit = async (e, signUp) => {
+  handleSubmit = async (e, login) => {
     e.preventDefault()
     const { username, name, email, password } = this.state
-
-    const token = await signUp({
+    const signUpVariables = {
       variables: {
         username,
         email,
         password,
         name
       }
-    })
-    localStorage.setItem(TWITTER_CLONE_TOKEN, token.data.signUp.token)
+    }
+    const signInVariables = {
+      variables: {
+        login: username,
+        password
+      }
+    }
+
+    const variables = this.props.signUp ? signUpVariables : signInVariables
+
+    const token = await login(variables)
+
+    localStorage.setItem(
+      TWITTER_CLONE_TOKEN,
+      token.data[this.props.signUp ? 'signUp' : 'signIn'].token
+    )
+
     window.location.reload()
   }
   handleOnChange = e => {
@@ -85,34 +102,41 @@ class Form extends Component {
     })
   }
   render() {
-    const { signUp, mutation } = this.props
+    const { signUp, onSubmit } = this.props
+
     return (
       <FormWrapper
         signUp={signUp}
-        onSubmit={e => this.handleSubmit(e, mutation)}
+        onSubmit={e => this.handleSubmit(e, onSubmit)}
       >
         {signUp && (
-          <Input
-            name="name"
-            onChange={this.handleOnChange}
-            type="text"
-            required
-            placeholder="Name"
-          />
+          <>
+            <Input
+              name="name"
+              onChange={this.handleOnChange}
+              type="text"
+              required
+              placeholder="Name"
+              full={this.props.signUp}
+            />
+            <Input
+              name="email"
+              onChange={this.handleOnChange}
+              type="email"
+              required
+              placeholder="Email"
+              full={this.props.signUp}
+            />
+          </>
         )}
-        <Input
-          name="email"
-          onChange={this.handleOnChange}
-          type="email"
-          required
-          placeholder="Email"
-        />
+
         <Input
           name="username"
           onChange={this.handleOnChange}
           type="text"
           required
           placeholder="Username"
+          full={this.props.signUp}
         />
         <Input
           name="password"
@@ -120,6 +144,7 @@ class Form extends Component {
           type="password"
           required
           placeholder="Password"
+          full={this.props.signUp}
         />
         <Button type="submit" hollow>
           {signUp ? 'Sign Up' : 'Log In'}
@@ -139,12 +164,13 @@ export default class Login extends Component {
 
   render() {
     return (
-      <Mutation mutation={SIGN_UP}>
-        {signUp => (
+      <Mutation mutation={this.state.signUp ? SIGN_UP : SIGN_IN}>
+        {login => (
           <Half>
             <div />
+
             <SignIn>
-              <Form signUp={this.state.signUp} mutation={signUp} />
+              <Form signUp={this.state.signUp} onSubmit={login} />
               <Info>
                 <h2>See what’s happening in the Kurt's world right now</h2>
                 <h3>Join Twitter Clone today.</h3>
