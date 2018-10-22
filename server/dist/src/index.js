@@ -1,7 +1,15 @@
-// import 'dotenv/config'
-import express from 'express'
-// import { ApolloServer, AuthenticationError } from 'apollo-server-express'
-import cors from 'cors'
+'use strict';
+
+var _express = require('express');
+
+var _express2 = _interopRequireDefault(_express);
+
+var _cors = require('cors');
+
+var _cors2 = _interopRequireDefault(_cors);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 // import jwt from 'jsonwebtoken'
 
 // import schema from './schema'
@@ -10,14 +18,17 @@ import cors from 'cors'
 // import freshData from './models/freshData'
 
 // Initializing express server
-const app = express()
+// import 'dotenv/config'
+var app = (0, _express2.default)();
 
 // Using CORS
-app.use(cors())
 
-app.get('/', function(req, res) {
-  res.send('Go to /graphql for API')
-})
+// import { ApolloServer, AuthenticationError } from 'apollo-server-express'
+app.use((0, _cors2.default)());
+
+app.get('/', function (req, res) {
+  res.send('Go to /graphql for API');
+});
 
 // Getting and verifying JWT
 // const getMe = async req => {
