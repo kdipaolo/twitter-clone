@@ -60,7 +60,9 @@ server.applyMiddleware({ app, path: '/graphql' })
 
 const launchMessage = port =>
   colors.bgGreen.black.italic.underline(
-    `🚀 [Apollo Server] 🚀 on http://localhost:${port}/graphql`
+    `🚀 --------------- [Apollo Server] --------------- 🚀 
+    Server running on: http://localhost:${port}/graphql
+    🚀 --------------- [Apollo Server] --------------- 🚀 `
   )
 
 // if fresh database flag set to true then load in fresh data
