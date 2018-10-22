@@ -1,5 +1,6 @@
 // import 'dotenv/config'
 // import express from 'express'
+const express = require('express')
 // import { ApolloServer, AuthenticationError } from 'apollo-server-express'
 // import cors from 'cors'
 // import jwt from 'jsonwebtoken'
