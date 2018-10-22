@@ -15,6 +15,10 @@ const app = express()
 // Using CORS
 app.use(cors())
 
+app.get('/', function(req, res) {
+  res.send('Go to /graphql for API')
+})
+
 // Getting and verifying JWT
 const getMe = async req => {
   const token = req.headers['x-token']
