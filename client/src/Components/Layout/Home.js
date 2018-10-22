@@ -3,9 +3,10 @@ import React, { Component } from 'react'
 import { Query } from 'react-apollo'
 import Tweet from '../Elements/Tweet'
 import styled from 'styled-components'
-import NewTweet from '../Elements/NewTweet'
+
 import { FEED } from '../../utils/queries'
 import NoContent from '../Elements/NoContent'
+import NewTweetContainer from '../../Containers/NewTweetContainer'
 
 const Container = styled.div`
   min-height: 150px;
@@ -24,7 +25,7 @@ export default class Home extends Component {
         {({ data: { feed }, loading }) =>
           !loading && (
             <Container>
-              <NewTweet />
+              <NewTweetContainer />
               {feed.length ? (
                 feed.map(tweet => <Tweet key={tweet.id} tweet={tweet} />)
               ) : (

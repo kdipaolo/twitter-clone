@@ -1,11 +1,10 @@
 // New Tweet Component
 import React, { Component } from 'react'
-import { Mutation } from 'react-apollo'
 import styled, { css } from 'styled-components'
+import PropTypes from 'prop-types'
 
 import ProfilePicture from './ProfilePicture'
 import Button from './Button'
-import { CREATE_TWEET } from '../../utils/queries'
 
 const Container = styled.form`
   padding: ${props => props.theme.space};
@@ -44,57 +43,49 @@ const Textarea = styled.textarea`
 `
 
 export default class NewTweet extends Component {
-  state = {
-    expand: false,
-    message: ''
-  }
-  expand = () => {
-    this.setState({
-      expand: true
-    })
-  }
-  handleTextareaChange = e => {
-    this.setState({
-      message: e.target.value
-    })
-  }
   render() {
-    const { expand, message } = this.state
+    const {
+      createTweet,
+      reset,
+      handleTextareaChange,
+      message,
+      expandInput,
+      expand
+    } = this.props
+
     return (
-      <Mutation
-        mutation={CREATE_TWEET}
-        variables={{ message: this.state.message }}
-        refetchQueries={['feed', 'me']}
+      <Container
+        onSubmit={async e => {
+          e.preventDefault()
+          reset()
+          await createTweet()
+        }}
       >
-        {createTweet => (
-          <Container
-            onSubmit={async e => {
-              e.preventDefault()
-              await createTweet()
-              this.setState({
-                message: '',
-                expand: false
-              })
-            }}
-          >
-            <Input>
-              <ProfilePicture />
-              <Textarea
-                onChange={this.handleTextareaChange}
-                value={message}
-                placeholder="What's happening?"
-                onClick={this.expand}
-                expand={expand}
-              />
-            </Input>
-            {expand && (
-              <Button type="submit" disabled={!message}>
-                Tweet
-              </Button>
-            )}
-          </Container>
+        <Input>
+          <ProfilePicture />
+          <Textarea
+            onChange={handleTextareaChange}
+            value={message}
+            placeholder="What's happening?"
+            onClick={expandInput}
+            expand={expand}
+          />
+        </Input>
+        {expand && (
+          <Button type="submit" disabled={!message}>
+            Tweet
+          </Button>
         )}
-      </Mutation>
+      </Container>
     )
   }
+}
+
+NewTweet.propTypes = {
+  createTweet: PropTypes.func.isRequired,
+  expand: PropTypes.bool.isRequired,
+  message: PropTypes.string.isRequired,
+  reset: PropTypes.func.isRequired,
+  handleTextareaChange: PropTypes.func.isRequired,
+  expandInput: PropTypes.func.isRequired
 }

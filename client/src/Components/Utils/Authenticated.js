@@ -4,6 +4,7 @@ import { ME } from '../../utils/queries'
 import { Query } from 'react-apollo'
 import styled from 'styled-components'
 import logo from '../../images/logo.svg'
+import { TWITTER_CLONE_TOKEN } from '../../config'
 
 const Overlay = styled.div`
   background: #ffffff;
@@ -31,9 +32,12 @@ export default class Authenticated extends Component {
   render() {
     return (
       <Query query={ME}>
-        {({ loading, data: user }) => {
+        {({ loading, data: user, error }) => {
           if (loading) {
             return <LoadingOverlay />
+          }
+          if (error) {
+            localStorage.removeItem(TWITTER_CLONE_TOKEN)
           }
 
           return user && user.me && user.me.email ? (
