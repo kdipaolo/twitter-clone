@@ -1,11 +1,11 @@
-// Different User view Compoent
+// Different User view Component
 import React, { Component } from 'react'
 import { Query } from 'react-apollo'
 import { USERS_TWEETS, GET_USER } from '../../utils/queries'
 import Tweet from '../Elements/Tweet'
 import UserThumbnail from '../Elements/UserThumbnail'
 
-export default class User extends Component {
+export default class UserProfile extends Component {
   render() {
     return (
       <div>
