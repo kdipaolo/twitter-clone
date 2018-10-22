@@ -1,28 +1,17 @@
 import models from './'
+import faker from 'faker'
 
-const users = [
-  {
-    email: 'kdipaolo@test.com',
-    username: 'kdipaolo',
-    password: 'password',
-    name: 'Kurt DiPaolo',
-    tweets: [{ message: 'First tweet' }]
-  },
-  {
-    email: 'johndoe@test.com',
-    username: 'johndoe',
-    password: 'password',
-    name: 'John Doe',
-    tweets: [{ message: 'Second tweet' }, { message: 'Third tweet' }]
-  },
-  {
-    email: 'edipaolo@test.com',
-    username: 'edipaolo',
-    password: 'password',
-    name: 'Emma DiPaolo',
-    tweets: [{ message: 'Fourth tweet' }, { message: 'Fifth tweet' }]
-  }
-]
+const length = 10
+
+const users = Array.from({ length }).map(user => ({
+  name: `${faker.name.firstName()} ${faker.name.lastName()}`,
+  email: `${faker.name.firstName()}${faker.name.lastName()}@test.com`,
+  username: `${faker.name.firstName()}${faker.name.lastName()}`.toLowerCase(),
+  password: 'password',
+  tweets: Array.from({ length: 7 }).map(tweet => ({
+    message: faker.random.words()
+  }))
+}))
 
 export default async () => {
   users.map(async user => {
