@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import styled, { css } from 'styled-components'
 import Button from '../Elements/Button'
 import { Mutation } from 'react-apollo'
-import { SIGN_UP, LOGIN, SIGN_IN } from '../../utils/queries'
+import { SIGN_UP, SIGN_IN } from '../../utils/queries'
 import { TWITTER_CLONE_TOKEN } from '../../config'
 
 const Half = styled.div`
@@ -150,7 +150,7 @@ class Form extends Component {
           type="password"
           required
           placeholder="Password"
-          minlength="8"
+          minLength="8"
           full={this.props.signUp}
         />
         <Button type="submit" hollow>

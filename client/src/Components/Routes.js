@@ -16,7 +16,6 @@ import Moments from './Layout/Moments'
 import Notifications from './Layout/Notifications'
 import Messages from './Layout/Messages'
 import UserProfile from './Layout/User'
-import Login from './Layout/Login'
 
 const Wrapper = styled.div`
   max-width: ${props => props.theme.maxWidth};

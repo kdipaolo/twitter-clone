@@ -9,6 +9,7 @@ const token = localStorage.getItem(TWITTER_CLONE_TOKEN)
 const client = new ApolloClient({
   uri: process.env.REACT_APP_APOLLO_URL,
   headers: token && {
+    // eslint-disable-next-line
     ['x-token']: token
   }
 })
