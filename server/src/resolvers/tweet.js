@@ -19,8 +19,10 @@ export default {
       }
     ),
     feed: async (parent, args, { models, me }) => {
+      // Get the user id's that the user is following
       const { following } = await models.User.findById(me.id)
-
+      // If the user is following users, get all the tweets from these users
+      // if not return an empty array
       if (following) {
         const tweets = await models.Tweet.findAll({
           where: {
