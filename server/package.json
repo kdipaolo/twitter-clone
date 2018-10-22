@@ -7,8 +7,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node ./dist/src/index.js",
-    "build": "babel src/*.js -d dist"
+    "start": "node build/index.js"
   },
   "author": "",
   "license": "ISC",
