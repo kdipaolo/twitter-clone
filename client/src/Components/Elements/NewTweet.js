@@ -64,7 +64,7 @@ export default class NewTweet extends Component {
       <Mutation
         mutation={CREATE_TWEET}
         variables={{ message: this.state.message }}
-        refetchQueries={['feed']}
+        refetchQueries={['feed', 'me']}
       >
         {createTweet => (
           <Container

@@ -32,7 +32,11 @@ export default {
 
         return tweets
       } else {
-        return []
+        return await models.Tweet.findAll({
+          where: {
+            userId: [String(me.id)]
+          }
+        })
       }
     }
   },

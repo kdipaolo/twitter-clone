@@ -36,8 +36,9 @@ const UserInfo = styled.div`
 
 export default class LeftBar extends Component {
   render() {
-    const { name, username, following } = this.props.user
-
+    const { name, username, following, tweets } = this.props.user
+    const numOfTweets = tweets.length || 0
+    const numFollowing = following.length || 0
     return (
       <div>
         <Card noPad>
@@ -50,11 +51,11 @@ export default class LeftBar extends Component {
             <Info>
               <li>
                 Tweets
-                <span>135</span>
+                <span>{numOfTweets}</span>
               </li>
               <li>
                 Following
-                <span>{following.length}</span>
+                <span>{numFollowing}</span>
               </li>
               <li>
                 Followers

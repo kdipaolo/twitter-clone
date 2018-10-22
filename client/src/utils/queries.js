@@ -35,6 +35,9 @@ export const ME = gql`
       name
       email
       following
+      tweets {
+        id
+      }
     }
   }
 `
