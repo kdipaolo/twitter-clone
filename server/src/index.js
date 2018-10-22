@@ -3,6 +3,7 @@
 const express = require('express')
 // import { ApolloServer, AuthenticationError } from 'apollo-server-express'
 // import cors from 'cors'
+const cors = require('cors')
 // import jwt from 'jsonwebtoken'
 
 // import schema from './schema'
