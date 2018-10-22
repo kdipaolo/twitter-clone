@@ -29,7 +29,7 @@ export const FEED = gql`
 `
 
 export const ME = gql`
-  {
+  query me {
     me {
       username
       name

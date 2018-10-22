@@ -34,7 +34,10 @@ export default class UserThumbnail extends Component {
     const { username, name, id } = this.props.user
     const { noFollow, children } = this.props
     return (
-      <Mutation mutation={FOLLOW} refetchQueries={['whoToFollow', 'feed']}>
+      <Mutation
+        mutation={FOLLOW}
+        refetchQueries={['whoToFollow', 'feed', 'me']}
+      >
         {follow => (
           <Container>
             <Link to={`/user/${username}`}>
