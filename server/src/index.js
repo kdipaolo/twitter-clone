@@ -15,8 +15,6 @@ const app = express()
 // Using CORS
 app.use(cors())
 
-console.log('Twitter Clone')
-
 app.get('/', function(req, res) {
   res.send('Go to /graphql for API')
 })
