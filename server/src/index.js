@@ -30,7 +30,7 @@ const getMe = async req => {
   }
 }
 
-const port = 8888
+const port = process.env.PORT || 8888
 
 // Initializing the express server the
 const server = new ApolloServer({
