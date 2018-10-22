@@ -150,6 +150,7 @@ class Form extends Component {
           type="password"
           required
           placeholder="Password"
+          minlength="8"
           full={this.props.signUp}
         />
         <Button type="submit" hollow>

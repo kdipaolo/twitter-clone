@@ -8,6 +8,7 @@ import { FEED } from '../../utils/queries'
 import NoContent from '../Elements/NoContent'
 
 const Container = styled.div`
+  min-height: 150px;
   > div {
     border-top: 1px solid ${props => props.theme.lightGray};
   }

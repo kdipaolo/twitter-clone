@@ -48,6 +48,7 @@ export default {
         password,
         name
       })
+
       /// returning a token for the client side to use for auth
       return {
         token: createToken(user, secret, '30m')
