@@ -20,6 +20,12 @@ app.get('/', function(req, res) {
   res.send('Go to /graphql for API')
 })
 
+const port = process.env.PORT || 8888
+
+app.listen({ port: port }, () => {
+  console.log(`Apollo Server on http://localhost:${port}/graphql`)
+})
+
 //Getting and verifying JWT
 // const getMe = async req => {
 //   const token = req.headers['x-token']
