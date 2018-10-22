@@ -1,10 +1,13 @@
 // New Tweet Component
 import React, { Component } from 'react'
-import ProfilePicture from './ProfilePicture'
+import { Mutation } from 'react-apollo'
 import styled, { css } from 'styled-components'
-import Button from './Button'
 
-const Container = styled.div`
+import ProfilePicture from './ProfilePicture'
+import Button from './Button'
+import { CREATE_TWEET } from '../../utils/queries'
+
+const Container = styled.form`
   padding: ${props => props.theme.space};
   background: ${props => props.theme.lightBlue};
   text-align: right;
@@ -58,19 +61,40 @@ export default class NewTweet extends Component {
   render() {
     const { expand, message } = this.state
     return (
-      <Container>
-        <Input>
-          <ProfilePicture />
-          <Textarea
-            onChange={this.handleTextareaChange}
-            value={message}
-            placeholder="What's happening?"
-            onClick={this.expand}
-            expand={expand}
-          />
-        </Input>
-        {expand && <Button disabled={!message}>Tweet</Button>}
-      </Container>
+      <Mutation
+        mutation={CREATE_TWEET}
+        variables={{ message: this.state.message }}
+        refetchQueries={['feed']}
+      >
+        {createTweet => (
+          <Container
+            onSubmit={async e => {
+              e.preventDefault()
+              await createTweet()
+              this.setState({
+                message: '',
+                expand: false
+              })
+            }}
+          >
+            <Input>
+              <ProfilePicture />
+              <Textarea
+                onChange={this.handleTextareaChange}
+                value={message}
+                placeholder="What's happening?"
+                onClick={this.expand}
+                expand={expand}
+              />
+            </Input>
+            {expand && (
+              <Button type="submit" disabled={!message}>
+                Tweet
+              </Button>
+            )}
+          </Container>
+        )}
+      </Mutation>
     )
   }
 }

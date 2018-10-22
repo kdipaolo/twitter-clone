@@ -24,7 +24,7 @@ export default {
       if (following) {
         const tweets = await models.Tweet.findAll({
           where: {
-            userId: following
+            userId: [...following, String(me.id)]
           }
         })
 

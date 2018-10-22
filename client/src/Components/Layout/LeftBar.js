@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import Card from '../Elements/Card'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 
 const BannerPicture = styled.div`
   background: ${props => props.theme.blue};
@@ -41,8 +42,10 @@ export default class LeftBar extends Component {
       <Card noPad>
         <BannerPicture />
         <UserInfo>
-          <h3>{name}</h3>
-          <p>@{username}</p>
+          <Link to={`/user/${username}`}>
+            <h3>{name}</h3>
+            <p>@{username}</p>
+          </Link>
           <Info>
             <li>
               Tweets

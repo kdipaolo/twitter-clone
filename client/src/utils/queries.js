@@ -57,6 +57,20 @@ export const SIGN_UP = gql`
   }
 `
 
+export const CREATE_TWEET = gql`
+  mutation createTweet($message: String!) {
+    createTweet(message: $message) {
+      message
+      id
+      user {
+        id
+        username
+        name
+      }
+    }
+  }
+`
+
 export const FOLLOW = gql`
   mutation($userId: ID!) {
     follow(userId: $userId) {
