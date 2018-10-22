@@ -9,22 +9,24 @@ import NoContent from '../Elements/NoContent'
 export default class RightBar extends Component {
   render() {
     return (
-      <Query query={WHO_TO_FOLLOW}>
-        {({ data: { whoToFollow }, loading }) =>
-          !loading && (
-            <Card>
-              <h3>Who to follow</h3>
-              {whoToFollow.length ? (
-                whoToFollow.map(user => (
-                  <UserThumbnail key={user.id} user={user} />
-                ))
-              ) : (
-                <NoContent>You are following everyone :)</NoContent>
-              )}
-            </Card>
-          )
-        }
-      </Query>
+      <div>
+        <Query query={WHO_TO_FOLLOW}>
+          {({ data: { whoToFollow }, loading }) =>
+            !loading && (
+              <Card>
+                <h3>Who to follow</h3>
+                {whoToFollow.length ? (
+                  whoToFollow.map(user => (
+                    <UserThumbnail key={user.id} user={user} />
+                  ))
+                ) : (
+                  <NoContent>You are following everyone :)</NoContent>
+                )}
+              </Card>
+            )
+          }
+        </Query>
+      </div>
     )
   }
 }

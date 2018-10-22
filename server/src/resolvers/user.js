@@ -23,12 +23,14 @@ export default {
       // Get following ID's from user profile
       const { following } = await models.User.findById(me.id)
       // If there are followers combine them with the user ID, if not just show the user id in an array
-      const users = following ? [...following, String(me.id)] : [String(me.id)]
+      const followingUsers = following
+        ? [...following, String(me.id)]
+        : [String(me.id)]
       // Get All Users (TODO: Refactor for performance)
       const users = await models.User.findAll()
       // Only return users that are in the following array
       return users.filter(user => {
-        return !users.includes(String(user.id))
+        return !followingUsers.includes(String(user.id))
       })
     }
   },

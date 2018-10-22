@@ -39,29 +39,31 @@ export default class LeftBar extends Component {
     const { name, username, following } = this.props.user
 
     return (
-      <Card noPad>
-        <BannerPicture />
-        <UserInfo>
-          <Link to={`/user/${username}`}>
-            <h3>{name}</h3>
-            <p>@{username}</p>
-          </Link>
-          <Info>
-            <li>
-              Tweets
-              <span>135</span>
-            </li>
-            <li>
-              Following
-              <span>{following.length}</span>
-            </li>
-            <li>
-              Followers
-              <span>17</span>
-            </li>
-          </Info>
-        </UserInfo>
-      </Card>
+      <div>
+        <Card noPad>
+          <BannerPicture />
+          <UserInfo>
+            <Link to={`/user/${username}`}>
+              <h3>{name}</h3>
+              <p>@{username}</p>
+            </Link>
+            <Info>
+              <li>
+                Tweets
+                <span>135</span>
+              </li>
+              <li>
+                Following
+                <span>{following.length}</span>
+              </li>
+              <li>
+                Followers
+                <span>17</span>
+              </li>
+            </Info>
+          </UserInfo>
+        </Card>
+      </div>
     )
   }
 }

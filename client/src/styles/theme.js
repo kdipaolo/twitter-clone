@@ -7,5 +7,6 @@ export default {
   maxWidth: '1200px',
   black: '#333',
   lightBlue: '#E7F5FC',
-  space: '10px'
+  space: '10px',
+  breakPoint: '850px'
 }

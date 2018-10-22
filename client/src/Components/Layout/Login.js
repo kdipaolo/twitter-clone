@@ -15,6 +15,12 @@ const Half = styled.div`
   > div:last-of-type {
     background: ${props => props.theme.white};
   }
+  @media (max-width: ${props => props.theme.breakPoint}) {
+    grid-template-columns: 1fr;
+    & > div:first-of-type {
+      display: none;
+    }
+  }
 `
 
 const SignIn = styled.div`

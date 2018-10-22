@@ -21,12 +21,22 @@ import Login from './Layout/Login'
 const Wrapper = styled.div`
   max-width: ${props => props.theme.maxWidth};
   margin: 5% auto;
+  @media (max-width: ${props => props.theme.breakPoint}) {
+    margin: 10% auto;
+  }
 `
 
 const Container = styled.div`
   display: grid;
   grid-gap: 15px;
   grid-template-columns: 1fr 2fr 1fr;
+
+  @media (max-width: ${props => props.theme.breakPoint}) {
+    grid-template-columns: 1fr;
+    & > div {
+      margin: 0px ${props => props.theme.space};
+    }
+  }
 `
 
 export default function Routes() {
@@ -41,14 +51,16 @@ export default function Routes() {
               <Switch>
                 <Container>
                   <LeftBar user={currentUser} />
-                  <Card noPad>
-                    <Route exact path="/" component={Home} />
-                    <Route path="/moments" component={Moments} />
-                    <Route path="/notifications" component={Notifications} />
-                    <Route path="/messages" component={Messages} />
-                    {/* User Profile View */}
-                    <Route path="/user/:username" component={UserProfile} />
-                  </Card>
+                  <div>
+                    <Card noPad>
+                      <Route exact path="/" component={Home} />
+                      <Route path="/moments" component={Moments} />
+                      <Route path="/notifications" component={Notifications} />
+                      <Route path="/messages" component={Messages} />
+                      {/* User Profile View */}
+                      <Route path="/user/:username" component={UserProfile} />
+                    </Card>
+                  </div>
                   <RightBar />
                 </Container>
               </Switch>
