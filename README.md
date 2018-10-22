@@ -1,4 +1,24 @@
 # Twitter Clone
+- Front End: https://client-unbzxjjswm.now.sh/
+- API: https://dipaolo-tsc.herokuapp.com/graphql
+
+
+## Setup 
+
+### Client setup
+1. `cd client`
+2. `yarn`
+3. `yarn start` 
+4. This will use the server API that I have deployed here: https://dipaolo-tsc.herokuapp.com/graphql . If you would like to use the server locally.  Follow server setup and change `REACT_APP_APOLLO_URL` in `client/.env` to `http://localhost:8888/graphql`
+
+
+### Server setup
+1. `cd server`
+2. `npm install`
+4.  On start up, server is set t populate the postgres database with seed data (users and tweets), to avoid this go to `server/src/index.js` and change the `freshDatabase` const to `true`
+3. `npm start`
+
+
 
 ## General Guidelines
 - Your technology choices are your own to make, but be aware someone here will need to pair with you on this project.
