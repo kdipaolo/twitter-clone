@@ -14,8 +14,8 @@ export default {
     // If user is authenticated, shows all tweets
     tweets: combineResolvers(
       isAuthenticated,
-      async (parent, args, { models }) => {
-        return await models.Tweet.findAll()
+      async (parent, { userId }, { models }) => {
+        return await models.Tweet.findAll({ where: { userId } })
       }
     ),
     feed: async (parent, args, { models, me }) => {

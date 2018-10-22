@@ -4,7 +4,7 @@ import { gql } from 'apollo-server-express'
 export default gql`
   extend type Query {
     tweet(id: ID!): Tweet
-    tweets: [Tweet]!
+    tweets(userId: ID!): [Tweet]!
     feed: [Tweet]!
   }
 

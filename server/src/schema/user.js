@@ -5,6 +5,7 @@ export default gql`
   extend type Query {
     me: User
     whoToFollow: [User]!
+    user(username: String!): User
   }
 
   extend type Mutation {

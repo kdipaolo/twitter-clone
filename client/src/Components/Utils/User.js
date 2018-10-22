@@ -6,7 +6,9 @@ export default class User extends Component {
   render() {
     return (
       <Query query={ME}>
-        {({ loading, data: user }) => !loading && this.props.children(user)}
+        {({ loading, data: user }) =>
+          !loading && this.props.children(user && user.me)
+        }
       </Query>
     )
   }

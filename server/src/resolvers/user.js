@@ -15,6 +15,10 @@ export default {
     me: (parent, args, { me }) => {
       return me || {}
     },
+    user: async (parent, { username }, { models }) => {
+      const user = await models.User.findAll({ where: { username } })
+      return user[0]
+    },
     whoToFollow: async (parent, args, { models, me }) => {
       const { following: a } = await models.User.findById(me.id)
 

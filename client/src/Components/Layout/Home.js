@@ -5,6 +5,7 @@ import Tweet from '../Elements/Tweet'
 import styled from 'styled-components'
 import NewTweet from '../Elements/NewTweet'
 import { FEED } from '../../utils/queries'
+import NoContent from '../Elements/NoContent'
 
 const Container = styled.div`
   > div {
@@ -23,9 +24,11 @@ export default class Home extends Component {
           !loading && (
             <Container>
               <NewTweet />
-              {feed.map(tweet => (
-                <Tweet key={tweet.id} tweet={tweet} />
-              ))}
+              {feed.length ? (
+                feed.map(tweet => <Tweet key={tweet.id} tweet={tweet} />)
+              ) : (
+                <NoContent>You're not following anyone :)</NoContent>
+              )}
             </Container>
           )
         }

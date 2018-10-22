@@ -6,8 +6,8 @@ export default class Authenticated extends Component {
   render() {
     return (
       <User>
-        {({ me: currentUser, loading }) =>
-          !loading && currentUser && currentUser.email ? (
+        {currentUser =>
+          currentUser && currentUser.email ? (
             this.props.children(currentUser)
           ) : (
             <Login />

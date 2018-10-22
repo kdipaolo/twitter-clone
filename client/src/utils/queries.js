@@ -1,8 +1,8 @@
 import gql from 'graphql-tag'
 
-export const GET_TWEETS = gql`
-  query getTweets {
-    tweets {
+export const USERS_TWEETS = gql`
+  query getTweets($userId: ID!) {
+    tweets(userId: $userId) {
       message
       id
       user {
@@ -68,6 +68,16 @@ export const FOLLOW = gql`
 export const WHO_TO_FOLLOW = gql`
   query whoToFollow {
     whoToFollow {
+      id
+      name
+      username
+    }
+  }
+`
+
+export const GET_USER = gql`
+  query getUser($username: String!) {
+    user(username: $username) {
       id
       name
       username
