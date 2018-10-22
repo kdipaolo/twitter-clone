@@ -9,7 +9,7 @@
   "scripts": {
     "start": "nodemon --exec babel-node src/index.js"
   },
-  "author": "",
+  "author": "Kurt DiPaolo",
   "license": "ISC",
   "dependencies": {
     "apollo-server": "^2.1.0",
