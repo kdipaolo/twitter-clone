@@ -11,11 +11,11 @@ import RightBar from './Layout/RightBar'
 import Card from './Elements/Card'
 
 // Routes
-import Home from './Layout/Home'
 import Moments from './Layout/Moments'
 import Notifications from './Layout/Notifications'
 import Messages from './Layout/Messages'
 import UserProfile from './Layout/UserProfile'
+import FeedContainer from '../Containers/FeedContainer'
 
 const Wrapper = styled.div`
   max-width: ${props => props.theme.maxWidth};
@@ -52,7 +52,7 @@ export default function Routes() {
                   <LeftBar user={currentUser} />
                   <div>
                     <Card noPad>
-                      <Route exact path="/" component={Home} />
+                      <Route exact path="/" component={FeedContainer} />
                       <Route path="/moments" component={Moments} />
                       <Route path="/notifications" component={Notifications} />
                       <Route path="/messages" component={Messages} />
