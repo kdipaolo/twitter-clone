@@ -62,7 +62,7 @@ export default {
 
       /// returning a token for the client side to use for auth
       return {
-        token: createToken(user, secret, '30m')
+        token: createToken(user, secret, '12h')
       }
     },
     // Sign in with a login and password
@@ -81,7 +81,7 @@ export default {
       }
       // If there is a user found and thee password is valid
       // returning a token for the client side to use for auth
-      return { token: createToken(user, secret, '30m') }
+      return { token: createToken(user, secret, '12h') }
     },
     follow: async (parent, args, { models, me }) => {
       models.User.update(
