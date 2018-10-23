@@ -2,6 +2,14 @@
 - Front End: https://client-ronxymwltt.now.sh/
 - API: https://dipaolo-tsc.herokuapp.com/graphql
 
+## Features
+- Sign Up / Login / Logout
+- Ability to create a new tweet
+- Tweets feed
+- Ability to follow users and see their tweets in the twitter feed
+- Ability to see current user info (Name, username, tweets, number of following/followers)
+- Ability to see other users profiles with tweets
+
 
 ## Setup 
 
