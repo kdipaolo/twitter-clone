@@ -1,5 +1,5 @@
 # Twitter Clone
-- Front End: https://client-unbzxjjswm.now.sh/
+- Front End: https://client-autqiigolf.now.sh/
 - API: https://dipaolo-tsc.herokuapp.com/graphql
 
 
