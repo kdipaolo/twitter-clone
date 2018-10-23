@@ -3,7 +3,18 @@ import React, { Component } from 'react'
 import { Query } from 'react-apollo'
 import { USERS_TWEETS, GET_USER } from '../../utils/queries'
 import Tweet from '../Elements/Tweet'
-import UserThumbnail from '../Elements/UserThumbnail'
+import styled from 'styled-components'
+
+const TweetsTitle = styled.h4`
+  text-align: center;
+  background: ${props => props.theme.offWhite};
+  color: ${props => props.theme.black};
+  padding: ${props => props.theme.space};
+  margin: 0;
+  span {
+    color: ${props => props.theme.darkGray};
+  }
+`
 
 export default class UserProfile extends Component {
   render() {
@@ -19,9 +30,14 @@ export default class UserProfile extends Component {
                 {({ data: { tweets }, loading }) =>
                   !loading && (
                     <>
-                      <UserThumbnail noFollow user={data.user} />
-                      <hr />
-                      <h4>{data.user.name} Tweets:</h4>
+                      <TweetsTitle>
+                        {data.user.name}{' '}
+                        <span>
+                          (@
+                          {data.user.username})
+                        </span>{' '}
+                        Tweets
+                      </TweetsTitle>
                       {tweets.map(tweet => (
                         <Tweet tweet={tweet} />
                       ))}

@@ -18,10 +18,13 @@ const Container = styled.div`
 export default class Feed extends Component {
   render() {
     const { tweets } = this.props
+    const newestFirst = (a, b) => (Number(a.id) < Number(b.id) ? 1 : -1)
     return (
       <Container>
         {tweets.length ? (
-          tweets.map(tweet => <Tweet key={tweet.id} tweet={tweet} />)
+          tweets
+            .sort(newestFirst)
+            .map(tweet => <Tweet key={tweet.id} tweet={tweet} />)
         ) : (
           <NoContent>You're not following anyone :)</NoContent>
         )}

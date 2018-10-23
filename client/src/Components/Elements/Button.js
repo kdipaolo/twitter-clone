@@ -22,6 +22,10 @@ const Container = styled.button`
       border: 1px solid ${props => props.theme.blue};
       color: ${props => props.theme.blue};
       background: transparent;
+      &:hover {
+        background: ${props => props.theme.blue};
+        color: ${props => props.theme.white};
+      }
     `};
   /* Disabled Button Styles */
   ${props =>

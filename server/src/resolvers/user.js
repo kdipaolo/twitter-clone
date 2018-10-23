@@ -32,6 +32,17 @@ export default {
       return users.filter(user => {
         return !followingUsers.includes(String(user.id))
       })
+    },
+    followers: async (parent, args, { models, me }) => {
+      // Logged in users's ID
+      const id = String(me.id)
+      // All Users
+      const users = await models.User.findAll()
+      // TODO: Make this more performant by using sequlize to only pull by followers
+      return users.filter(
+        // If users has logged in users id in following reutrn it
+        user => user.following && user.following.includes(id)
+      )
     }
   },
   Mutation: {

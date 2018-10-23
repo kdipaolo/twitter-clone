@@ -44,10 +44,7 @@ const Links = styled.div`
   }
 `
 
-const Actions = styled.div`
-  display: grid;
-  grid-template-columns: auto auto;
-`
+const Actions = styled.div``
 
 export default class Header extends Component {
   logout = () => {
@@ -63,7 +60,7 @@ export default class Header extends Component {
             {links.map((link, i) => {
               const Icon = link.icon
               return (
-                <NavLink to={link.to} key={i}>
+                <NavLink exact to={link.to} key={i}>
                   <Icon size={22} /> {link.name}
                 </NavLink>
               )
@@ -73,7 +70,7 @@ export default class Header extends Component {
           <img src={logo} width="50" alt="Logo" />
           {/* Tweet Button */}
           <Actions>
-            <Button>Tweet</Button>
+            {/* <Button>Tweet</Button> */}
             <Button hollow onClick={this.logout}>
               Log Out
             </Button>

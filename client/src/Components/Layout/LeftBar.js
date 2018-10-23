@@ -59,7 +59,7 @@ export default class LeftBar extends Component {
               </li>
               <li>
                 Followers
-                <span>17</span>
+                <span>0</span>
               </li>
             </Info>
           </UserInfo>

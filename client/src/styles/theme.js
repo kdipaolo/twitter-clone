@@ -8,5 +8,6 @@ export default {
   black: '#333',
   lightBlue: '#E7F5FC',
   space: '10px',
-  breakPoint: '850px'
+  breakPoint: '850px',
+  offWhite: '#f7f7f7'
 }
