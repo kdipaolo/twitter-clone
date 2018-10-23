@@ -5,7 +5,9 @@ const user = (sequelize, DataTypes) => {
   const User = sequelize.define('user', {
     username: {
       type: DataTypes.STRING,
-      unique: true,
+      unique: {
+        msg: 'Username is already taken'
+      },
       allowNull: false,
       validate: {
         notEmpty: true
@@ -20,7 +22,9 @@ const user = (sequelize, DataTypes) => {
     },
     email: {
       type: DataTypes.STRING,
-      unique: true,
+      unique: {
+        msg: 'Email is already taken'
+      },
       allowNull: false,
       validate: {
         notEmpty: true,

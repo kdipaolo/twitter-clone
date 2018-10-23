@@ -71,7 +71,8 @@ class Form extends Component {
     username: '',
     name: '',
     email: '',
-    password: ''
+    password: '',
+    error: ''
   }
   handleSubmit = async (e, login) => {
     e.preventDefault()
@@ -92,15 +93,18 @@ class Form extends Component {
     }
 
     const variables = this.props.signUp ? signUpVariables : signInVariables
+    try {
+      const token = await login(variables)
+      this.setState({ error: '' })
+      localStorage.setItem(
+        TWITTER_CLONE_TOKEN,
+        token.data[this.props.signUp ? 'signUp' : 'signIn'].token
+      )
 
-    const token = await login(variables)
-
-    localStorage.setItem(
-      TWITTER_CLONE_TOKEN,
-      token.data[this.props.signUp ? 'signUp' : 'signIn'].token
-    )
-
-    window.location.reload()
+      window.location.reload()
+    } catch (err) {
+      this.setState({ error: err.message.replace('GraphQL error: ', '') })
+    }
   }
   handleOnChange = e => {
     this.setState({
@@ -156,6 +160,7 @@ class Form extends Component {
         <Button type="submit" hollow>
           {signUp ? 'Sign Up' : 'Log In'}
         </Button>
+        <p>{this.state.error}</p>
       </FormWrapper>
     )
   }
