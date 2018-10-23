@@ -15,7 +15,7 @@
 ### Server setup
 1. `cd server`
 2. `npm install`
-4.  On start up, server is set t populate the postgres database with seed data (users and tweets), to avoid this go to `server/src/index.js` and change the `freshDatabase` const to `true`
+4.  On start up, server is set to populate the postgres database with seed data (users and tweets), to avoid this go to `server/src/index.js` and change the `freshDatabase` const to `true`
 3. `npm start`
 
 
