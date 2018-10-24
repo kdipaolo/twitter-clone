@@ -10,7 +10,7 @@ import models, { sequelize } from './models'
 import freshData from './models/freshData'
 import colors from 'colors'
 
-const freshDatabase = true
+const freshDatabase = false
 const port = process.env.PORT || 8888
 
 // Initializing express server
