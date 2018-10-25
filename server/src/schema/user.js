@@ -5,6 +5,7 @@ export default gql`
   extend type Query {
     me: User
     whoToFollow: [User]!
+    following: [User]!
     followers: [User]!
     user(username: String!): User
   }
@@ -18,6 +19,7 @@ export default gql`
     ): Token!
     signIn(login: String!, password: String!): Token!
     follow(userId: ID!): User!
+    unfollow(userId: ID!): User!
   }
 
   type User {

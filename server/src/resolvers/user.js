@@ -19,6 +19,18 @@ export default {
       const user = await models.User.findAll({ where: { username } })
       return user[0]
     },
+    following: async (parent, { username }, { models, me }) => {
+      // Get all of the currently logged in users followers
+      const currentUser = await models.User.findById(me.id)
+      // Getting an array of all of the users that they are following
+      const following = currentUser.following
+      // All users
+      const users = await models.User.findAll()
+      // Filter out all uses that are not being followed by this person
+      // TODO: This is bad for performance :(
+
+      return users.filter(user => following.includes(String(user.id)))
+    },
     whoToFollow: async (parent, args, { models, me }) => {
       // Get following ID's from user profile
       const { following } = await models.User.findById(me.id)
@@ -84,7 +96,7 @@ export default {
       return { token: createToken(user, secret, '12h') }
     },
     follow: async (parent, args, { models, me }) => {
-      models.User.update(
+      await models.User.update(
         {
           following: Sequelize.fn(
             'array_append',
@@ -94,6 +106,21 @@ export default {
         },
         { where: { id: me.id } }
       )
+      return {
+        id: args.userId
+      }
+    },
+    unfollow: async (parent, args, { models, me }) => {
+      // Getting currently logged in users followers
+      const user = await models.User.findById(me.id)
+      const { following } = user
+      const newFollowing = following.filter(userId => args.userId !== userId)
+
+      await models.User.update(
+        { following: newFollowing },
+        { where: { id: me.id } }
+      )
+
       return {
         id: args.userId
       }
