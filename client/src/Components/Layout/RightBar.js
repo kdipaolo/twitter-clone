@@ -5,6 +5,7 @@ import UserThumbnail from '../Elements/UserThumbnail'
 import { Query } from 'react-apollo'
 import { WHO_TO_FOLLOW } from '../../utils/queries'
 import NoContent from '../Elements/NoContent'
+import FollowButton from '../Elements/FollowButton'
 
 export default class RightBar extends Component {
   render() {
@@ -17,7 +18,9 @@ export default class RightBar extends Component {
                 <h3>Who to follow</h3>
                 {whoToFollow.length ? (
                   whoToFollow.map(user => (
-                    <UserThumbnail key={user.id} user={user} />
+                    <UserThumbnail key={user.id} user={user}>
+                      <FollowButton userId={user.id} />
+                    </UserThumbnail>
                   ))
                 ) : (
                   <NoContent>You are following everyone :)</NoContent>

@@ -3,10 +3,10 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-import Button from './Button'
+
 import ProfilePicture from './ProfilePicture'
-import { Mutation } from 'react-apollo'
-import { FOLLOW } from '../../utils/queries'
+import FollowButton from './FollowButton'
+
 const Container = styled.div`
   display: grid;
   grid-template-columns: auto 1fr;
@@ -34,40 +34,19 @@ export default class UserThumbnail extends Component {
     const { username, name, id } = this.props.user
     const { noFollow, children } = this.props
     return (
-      <Mutation
-        mutation={FOLLOW}
-        refetchQueries={['whoToFollow', 'feed', 'me']}
-      >
-        {follow => (
-          <Container>
-            <Link to={`/user/${username}`}>
-              <ProfilePicture />
-            </Link>
-            <div>
-              <Link to={`/user/${username}`}>
-                <Title>
-                  {name} <span>@{username}</span>
-                </Title>
-              </Link>
-              {!noFollow && (
-                <Button
-                  hollow
-                  onClick={() =>
-                    follow({
-                      variables: {
-                        userId: id
-                      }
-                    })
-                  }
-                >
-                  Follow
-                </Button>
-              )}
-              <P>{children}</P>
-            </div>
-          </Container>
-        )}
-      </Mutation>
+      <Container>
+        <Link to={`/user/${username}`}>
+          <ProfilePicture />
+        </Link>
+        <div>
+          <Link to={`/user/${username}`}>
+            <Title>
+              {name} <span>@{username}</span>
+            </Title>
+          </Link>
+          <>{children}</>
+        </div>
+      </Container>
     )
   }
 }

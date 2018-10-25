@@ -90,6 +90,14 @@ export const FOLLOW = gql`
   }
 `
 
+export const UNFOLLOW = gql`
+  mutation unfollowUser($userId: ID!) {
+    unfollow(userId: $userId) {
+      id
+    }
+  }
+`
+
 export const WHO_TO_FOLLOW = gql`
   query whoToFollow {
     whoToFollow {
@@ -103,6 +111,16 @@ export const WHO_TO_FOLLOW = gql`
 export const GET_USER = gql`
   query getUser($username: String!) {
     user(username: $username) {
+      id
+      name
+      username
+    }
+  }
+`
+
+export const FOLLOWERS = gql`
+  query following {
+    following {
       id
       name
       username

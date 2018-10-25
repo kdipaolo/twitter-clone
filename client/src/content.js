@@ -8,8 +8,8 @@ export const links = [
     icon: Home
   },
   {
-    to: '/moments',
-    name: 'Moments',
+    to: '/following',
+    name: 'Following',
     icon: Bell
   },
   {

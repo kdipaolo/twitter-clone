@@ -13,8 +13,8 @@ export default class Tweet extends Component {
     const { message, user } = this.props.tweet
     return (
       <Container>
-        <UserThumbnail noFollow user={user}>
-          {message}
+        <UserThumbnail user={user}>
+          <p>{message}</p>
         </UserThumbnail>
       </Container>
     )
